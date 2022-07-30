@@ -1,29 +1,11 @@
-const last1 = require('./utils/last');
-
-interface IParces {
-    args: string;
-    parse(): void;
-}
-
-type SignType = '-' | '+';
-enum EqualityRelativePosition {
-    AFTER = 'AFTER',
-    BEFORE = 'BEFORE',
-}
-
-interface PreParsedDataType {
-    value: string;
+interface ParsedDataTypeObj {
+    power: number;
+    multiplier?: number;
     position: boolean;
 }
 
-interface ParsedDataType {
-    // [key: number]: {
-        power: number;
-        sign: '-' | '+',
-        multiplier?: number;
-        divider?: number;
-        position: boolean;
-    // };
+export interface ParsedDataType {
+    [key: number]: Omit<ParsedDataTypeObj, 'position'>;
 }
 
 enum Signs {
@@ -34,11 +16,15 @@ enum Signs {
     EQUALITY = '=',
 }
 
-class Parser {
+export class Parser {
     args: string;
+    data: ParsedDataType;
+
+    static onlyDigit = /^\d+$/g;
 
     constructor(args: string[]) {
         this.args = this.prepareArgs(args);
+        this.data = {};
     }
 
     private prepareArgs(args: string | string[]) {
@@ -57,76 +43,58 @@ class Parser {
         return variable.includes('^') ? parseInt(variable.slice(2)) : 1;
     }
 
-    parse(): void {
-        const regexp = /([-]?\d+[\.\d]*)|(\*|\+|\/|\-|\=)|(X(\^\d|))/gi;
+    private setData(index: number, { multiplier, position, ...data }: ParsedDataTypeObj) {
+        const calculatedMultiplier = parseFloat((multiplier as unknown as string) || '0');
 
-        let stack: string[] = [];
-        const data: any[] = [];
-        const aaaa: ParsedDataType[] = [];
+        this.data[index] = {
+            ...data,
+            multiplier: (this.data[index]?.multiplier || 0) + (position ? calculatedMultiplier * -1 : calculatedMultiplier),
+        };
+    }
 
-        let foundEqualitySign = false;
-        let isVariable = false;
-        let result = regexp.exec(this.args);
+    private parseSide(side: string, position: boolean) {
+        const regexp = /([+-]?(\d+[\.\d]*))\*X(\^[0-9]|)|([-]?\d+[\.\d]*)/gi;
 
-        console.log(this.args.split(`^`).join(`**`));
+        let result = regexp.exec(side);
 
         while (result) {
             const match = result[0];
-            console.log( `Найдено ${result[0]} на позиции ${result.index}` );
 
-            data.push(match);
-
-            // if (match.includes('X')) {
-            //     isVariable = true;
-            // }
-
-            // if (match === Signs.PLUS || match === Signs.MINUS || !isNaN(parseInt(match))) {
-                // stack.push(match);
-            // }
-
-
-
-            // if (stack.length === 2) {
-            //     const a = parseFloat(stack.join(''));
-            //     stack.length = 0;
-
-            //     if (!isNaN(a)) {
-            //         const b: ParsedDataType = {
-            //             power: 0,
-            //             position: foundEqualitySign,
-            //             sign: a > 0 ? '+' : '-',
-            //             multiplier: a,
-            //         };
-            //         data[data.length] = b;
-            //     }
-            // }
-
-            // if (result[0] === Signs.EQUALITY) {
-            //     foundEqualitySign = true;
-            // }
-
-            result = regexp.exec(this.args);
-        }
-
-        for (let i = 0; i < data.length - 1; i++) {
-            if (data[i] === Signs.EQUALITY) {
-                foundEqualitySign = true;
-            }
-
-            if (!isNaN(parseFloat(data[i])) && ![Signs.MULTIPLICATION, Signs.DIVISION].includes(data[i + 1]) ) {
-                aaaa.push({
+            if (!match.includes('X')) {
+                this.setData(0, {
                     power: 0,
-                    sign: '+',
-                    position: foundEqualitySign,
-                    multiplier: data[i],
+                    position,
+                    multiplier: match as any,
+                });
+            } else {
+                const sortedVar = match.split(Signs.MULTIPLICATION).sort((a: string) => a.match(Parser.onlyDigit) ? 1 : -1);
+
+                const multiplier = sortedVar[1] as any;
+                const power = this.getPower(sortedVar[0]);
+                
+                this.setData(power, {
+                    power,
+                    multiplier,
+                    position,
                 })
             }
-        }
 
-        console.log('data', data);
-        console.log('aaaa', aaaa);
-        
+            result = regexp.exec(side);
+        }
+    }
+
+    getData() {
+        return this.data;
+    }
+
+    parse(): void {
+        const splitedByEquality = this.args.split(Signs.EQUALITY);
+        const leftSide = splitedByEquality[0];
+        const rightSide = splitedByEquality[1];
+
+        this.parseSide(leftSide, false);
+        this.parseSide(rightSide, true);
     }
 }
 
-module.exports = new Parser(process.argv.slice(2));
+export const parser = new Parser(process.argv.slice(2));
