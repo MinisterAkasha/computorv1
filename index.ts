@@ -25,6 +25,9 @@ const generateReducedForm = (data: ParsedDataType) => {
 const app = () => {
     const args = process.argv.slice(2);
     const a = parser.parse();
+
+    console.log('data', parser.getData());
+    
     // console.log(generateReducedForm(parser.getData()))
 
 
@@ -32,4 +35,4 @@ const app = () => {
 
 app();
 
-// npx ts-node index.ts "-534 - 4.2 * X^2 + 3 * X + 500 = 4 * X^2 + 2.5 * X"
+// npx ts-node index.ts

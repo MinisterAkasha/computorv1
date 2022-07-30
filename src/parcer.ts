@@ -53,12 +53,15 @@ export class Parser {
     }
 
     private parseSide(side: string, position: boolean) {
-        const regexp = /([+-]?(\d+[\.\d]*))\*X(\^[0-9]|)|([-]?\d+[\.\d]*)/gi;
+        const regexp = /(([+-]?(\d+[\.\d]*))\*|)X(\^[0-9]|)|([-]?\d+[\.\d]*)/gi;
 
         let result = regexp.exec(side);
 
         while (result) {
             const match = result[0];
+
+            console.log('match', match);
+            
 
             if (!match.includes('X')) {
                 this.setData(0, {
@@ -69,7 +72,7 @@ export class Parser {
             } else {
                 const sortedVar = match.split(Signs.MULTIPLICATION).sort((a: string) => a.match(Parser.onlyDigit) ? 1 : -1);
 
-                const multiplier = sortedVar[1] as any;
+                const multiplier = sortedVar.length === 1 ? 1 : sortedVar[1] as any;
                 const power = this.getPower(sortedVar[0]);
                 
                 this.setData(power, {
