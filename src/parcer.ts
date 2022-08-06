@@ -45,10 +45,11 @@ export class Parser {
 
     private setData(index: number, { multiplier, position, ...data }: ParsedDataTypeObj) {
         const calculatedMultiplier = parseFloat((multiplier as unknown as string) || '0');
+		const hasAlreadyMultiplier = this.data[index] && this.data[index].multiplier;
 
         this.data[index] = {
             ...data,
-            multiplier: (this.data[index]?.multiplier || 0) + (position ? calculatedMultiplier * -1 : calculatedMultiplier),
+            multiplier: (hasAlreadyMultiplier || 0) + (position ? calculatedMultiplier * -1 : calculatedMultiplier),
         };
     }
 

@@ -7,7 +7,7 @@ export enum ELogType {
 	TWO_SOLUTIONS = 'The two solutions are:',
 	ONLY_SOLUTION = 'The only solutions is:',
 	INFINITY_SOLUTIONS = 'Each real number is a solution',
-	NO_SOLUTION = 'This equation has no solutions',
+	NO_SOLUTION = 'This polynomial has no solutions',
 	REDUCED_FORM = 'Reduced form: ',
 	TOO_MUCH_DEGREE = 'The polynomial degree is strictly greater than 2, I can\'t solve.',
 	RIGHT_DEGREE = 'Polynomial degree: ',
@@ -55,6 +55,11 @@ export const Logger = {
 
 		if (solutions[0] === Infinity) {
 			console.log(ELogType.INFINITY_SOLUTIONS);
+
+			return;
+		} else if (solutions[0] === -Infinity) {
+			console.log(ELogType.NO_SOLUTION);
+
 			return;
 		}
 

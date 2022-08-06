@@ -36,7 +36,7 @@ export const getSolutions = ({a, b, c}: Coefficients, power: number, D?: number)
 	const solution = [];
 
 	if (power === 0) {
-		return [Infinity];
+		return [c === 0 ? Infinity : -Infinity];
 	} else if (power === 1) {
 		return [-1 * c / b];
 	}
