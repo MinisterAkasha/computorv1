@@ -1,4 +1,4 @@
-interface ParsedDataTypeObj {
+export interface ParsedDataTypeObj {
     power: number;
     multiplier?: number;
     position: boolean;
@@ -59,9 +59,6 @@ export class Parser {
 
         while (result) {
             const match = result[0];
-
-            console.log('match', match);
-            
 
             if (!match.includes('X')) {
                 this.setData(0, {
