@@ -92,9 +92,7 @@ const app = () => {
 	const coefs = getCoefficients(parser.getData());
 	Logger.logCoefficients(coefs);
 
-
 	const discriminant = getDiscriminant(coefs);
-
 	const solution = getSolutions(coefs, polynomialPower, discriminant);
 
 	if (polynomialPower === 2) {
@@ -102,7 +100,6 @@ const app = () => {
 	}
 
 	Logger.logSolutions(solution);
-
 }
 
 app();

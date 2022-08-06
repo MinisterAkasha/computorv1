@@ -1,5 +1,16 @@
 export const abs = (num: number) => num >= 0 ? num : num * -1;
 
+const simplifyComplexFraction = (a: number, b: number, D: number) => {
+	for (let i = 2; i <= a; i++) {
+		if (a % i === 0 && b % i === 0 && D % i === 0) {
+			a /= i;
+			b /= i;
+			D /= i;
+		}
+	}
+	return [a, b, D];
+}
+
 // нахождения квадратного корня по формуле Герона
 export const sqrt = (number: number) => {
 	let x;
@@ -34,7 +45,10 @@ export const getSolutions = ({a, b, c}: Coefficients, power: number, D?: number)
 		solution[0] = (-1 * b - sqrt(D)) / (2 * a);
 		solution[1] = (-1 * b + sqrt(D)) / (2 * a);
 	} else {
+		const divider = 2 * a;
 
+		solution[0] = `${(-1 * b) / divider} - ${sqrt(abs(D)) / divider} * i`;
+		solution[1] = `${(-1 * b) / divider} + ${sqrt(abs(D)) / divider} * i`;
 	}
 
 	if (solution[1] === solution[0]) {
