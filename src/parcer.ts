@@ -94,6 +94,12 @@ export class Parser {
 
         this.parseSide(leftSide, false);
         this.parseSide(rightSide, true);
+
+		for (const power in this.data) {
+			if (!this.data[power].multiplier) {
+				delete this.data[power];
+			}
+		}
     }
 }
 

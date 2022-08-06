@@ -1,13 +1,15 @@
 #!/usr/bin/node
 "use strict"
-import {ParsedDataType, ParsedDataTypeObj, parser} from './src/parcer';
-import {abs, Coefficients, getDiscriminant, getSolutions} from "./src/equation";
-import {ELogType, Logger} from "./src/logger";
+import { ParsedDataType, ParsedDataTypeObj, parser } from './src/parcer';
+import { abs, Coefficients, getDiscriminant, getSolutions } from "./src/equation";
+import { Logger } from "./src/logger";
 
 const getPolynomialPower = (data: ParsedDataType) => {
 	const powers = Object.keys(data);
 
-	return powers.sort((a, b) => +b - +a)[0];
+	return powers.length
+		? powers.sort((a, b) => +b - +a)[0]
+		: 0;
 }
 
 const powerToString = (power: number) => {
@@ -44,8 +46,11 @@ const generateReducedForm = (data: ParsedDataType) => {
 			return acc;
     	}, '');
 
-    result += '= 0'
-    result = result.trim().replace(/^[\+]? /g, '');
+    result += result.length ? ' = 0' : '0 = 0';
+    result = result
+		.trim()
+		.replace(/^[\+]? /g, '')
+		.replace(/  /g, ' ');
     
     return result;
 }
@@ -74,22 +79,29 @@ const app = () => {
 
 	Logger.logReducedForm(generateReducedForm(parsedData));
 
-	const polynomialPower = getPolynomialPower(parsedData);
+	const polynomialPower = Number(getPolynomialPower(parsedData));
 
 	Logger.logPolynomialDegree(polynomialPower);
 
-	 if (Number(polynomialPower) > 2) {
+	 if (polynomialPower > 2) {
 		 Logger.logTooMushDegree();
+
 		 return;
 	 }
 
-	// const coefs = getCoefficients(parser.getData());
-	// console.log('coefs', coefs);
-	// console.log('getDiscriminant', getDiscriminant(coefs));
-	// const solution = getSolutions(getDiscriminant(coefs), coefs);
-	//
-	// console.log('solution', solution);
-    // console.log(generateReducedForm(parser.getData()))
+	const coefs = getCoefficients(parser.getData());
+	Logger.logCoefficients(coefs);
+
+
+	const discriminant = getDiscriminant(coefs);
+
+	const solution = getSolutions(coefs, polynomialPower, discriminant);
+
+	if (polynomialPower === 2) {
+		Logger.logDiscriminant(discriminant);
+	}
+
+	Logger.logSolutions(solution);
 
 }
 
