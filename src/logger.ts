@@ -14,19 +14,30 @@ export enum ELogType {
 	COEFFICIENTS = 'The coefficient of the polynomial: ',
 }
 
-export const Logger = {
-	logReducedForm: (form: string) => {
-		console.log(ELogType.REDUCED_FORM, form);
-	},
-	logPolynomialDegree: (power: number) => {
-		console.log(ELogType.RIGHT_DEGREE, power);
-	},
-	logTooMushDegree: () => {
-		console.log(ELogType.TOO_MUCH_DEGREE);
-	},
-	logCoefficients: ({a, b, c}: Coefficients) => {
-		console.log(ELogType.COEFFICIENTS);
-		console.table([
+export class Logger {
+	private log;
+	private table;
+
+	constructor() {
+		this.log = process.env.NODE_ENV === 'test' ? () => {} : console.log;
+		this.table = process.env.NODE_ENV === 'test' ? () => {} : console.table;
+	}
+
+	logReducedForm(form: string) {
+		this.log(ELogType.REDUCED_FORM, form);
+	}
+
+	logPolynomialDegree(power: number) {
+		this.log(ELogType.RIGHT_DEGREE, power);
+	}
+
+	logTooMushDegree() {
+		this.log(ELogType.TOO_MUCH_DEGREE);
+	}
+
+	logCoefficients({a, b, c}: Coefficients) {
+		this.log(ELogType.COEFFICIENTS);
+		this.table([
 			{
 				coefficient: 'a',
 				value: a
@@ -40,39 +51,43 @@ export const Logger = {
 				value: c
 			}
 		]);
-	},
-	logDiscriminant: (discriminant: number) => {
+	}
+
+	logDiscriminant(discriminant: number) {
 		if (discriminant > 0) {
-			console.log(ELogType.POSITIVE_DISCRIMINANT, discriminant)
+			this.log(ELogType.POSITIVE_DISCRIMINANT, discriminant)
 		} else if (discriminant === 0) {
-			console.log(ELogType.ZERO_DISCRIMINANT);
+			this.log(ELogType.ZERO_DISCRIMINANT);
 		} else {
-			console.log(ELogType.NEGATIVE_DISCRIMINANT, discriminant);
+			this.log(ELogType.NEGATIVE_DISCRIMINANT, discriminant);
 		}
-	},
-	logSolutions: (solutions: Array<string | number>) => {
+	}
+
+	logSolutions(solutions: Array<string | number>) {
 		const solutionCount = solutions.length;
 
 		if (solutions[0] === Infinity) {
-			console.log(ELogType.INFINITY_SOLUTIONS);
+			this.log(ELogType.INFINITY_SOLUTIONS);
 
 			return;
 		} else if (solutions[0] === -Infinity) {
-			console.log(ELogType.NO_SOLUTION);
+			this.log(ELogType.NO_SOLUTION);
 
 			return;
 		}
 
 		if (solutionCount === 1) {
-			console.log(ELogType.ONLY_SOLUTION);
-			console.log(solutions[0]);
+			this.log(ELogType.ONLY_SOLUTION);
+			this.log(solutions[0]);
 
 			return;
 		}
 
-		console.log(ELogType.TWO_SOLUTIONS);
+		this.log(ELogType.TWO_SOLUTIONS);
 		solutions.forEach((solution) => {
-			console.log(solution);
+			this.log(solution);
 		})
 	}
 };
+
+export const logger = new Logger();
