@@ -62,6 +62,10 @@ describe('Reduced form test', () => {
 		expect(getReducedForm(EQUATIOS[12].eq)).toBe(EQUATIOS[12].rf);
 	});
 
+	it(EQUATIOS[13].eq, () => {
+		expect(getReducedForm(EQUATIOS[13].eq)).toBe(EQUATIOS[13].rf);
+	});
+
 	it(EQUATIOS[14].eq, () => {
 		expect(getReducedForm(EQUATIOS[14].eq)).toBe(EQUATIOS[14].rf);
 	});

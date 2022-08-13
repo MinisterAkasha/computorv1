@@ -1,18 +1,23 @@
 export const abs = (num: number) => num >= 0 ? num : num * -1;
 
-const simplifyComplexFraction = (a: number, b: number, D: number) => {
-	for (let i = 2; i <= a; i++) {
-		if (a % i === 0 && b % i === 0 && D % i === 0) {
-			a /= i;
-			b /= i;
-			D /= i;
-		}
-	}
-	return [a, b, D];
+const getComplexPart = (b: number, a: number) => {
+	const divider = 2 * a;
+
+	return ((-1 * b) / divider).toFixed(7);
+}
+
+const getRealPart = (D: number, a: number) => {
+	const divider = 2 * a;
+
+	return abs((sqrt(abs(D)) / divider)).toFixed(5);
 }
 
 // нахождения квадратного корня по формуле Герона
 export const sqrt = (number: number) => {
+	if (number === 0) {
+		return number;
+	}
+
 	let x;
 	let x1 = number / 2;
 
@@ -42,17 +47,15 @@ export const getSolutions = ({a, b, c}: Coefficients, power: number, D?: number)
 	}
 
 	if (power === 2 && D >= 0) {
-		solution[0] = (-1 * b - sqrt(D)) / (2 * a);
-		solution[1] = (-1 * b + sqrt(D)) / (2 * a);
+		solution[0] = ((-1 * b - sqrt(D)) / (2 * a)).toFixed(5);
+		solution[1] = ((-1 * b + sqrt(D)) / (2 * a)).toFixed(5);
 	} else {
-		const divider = 2 * a;
-
-		solution[0] = `${(-1 * b) / divider} - ${sqrt(abs(D)) / divider} * i`;
-		solution[1] = `${(-1 * b) / divider} + ${sqrt(abs(D)) / divider} * i`;
+		solution[0] = `${getComplexPart(b, a)} - ${getRealPart(D, a)} * i`;
+		solution[1] = `${getComplexPart(b, a)} + ${getRealPart(D, a)} * i`;
 	}
 
 	if (solution[1] === solution[0]) {
-		solution.pop();
+		solution.shift();
 	}
 
 	return solution;
