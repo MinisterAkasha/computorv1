@@ -27,6 +27,13 @@ export class Parser {
         this.data = {};
     }
 
+    private validate(str: string) {
+        const splitedByEquality = str.split(Signs.EQUALITY);
+        if (splitedByEquality.length !== 2) {
+            throw 'invalid format';
+        }
+    }
+
     private prepareArgs(args: string | string[]) {
         let result = '';
 
@@ -42,6 +49,9 @@ export class Parser {
     private getPower(variable: string): number {
         return variable.includes('^') ? parseInt(variable.slice(2)) : 1;
     }
+
+    // TODO
+    // private calcMultiplier(num: number, sign: string) {}
 
     private setData(index: number, { multiplier, position, ...data }: ParsedDataTypeObj) {
         const calculatedMultiplier = parseFloat((multiplier as unknown as string) || '0');
@@ -89,6 +99,8 @@ export class Parser {
     }
 
     parse(): void {
+        this.validate(this.args);
+
         const splitedByEquality = this.args.split(Signs.EQUALITY);
         const leftSide = splitedByEquality[0];
         const rightSide = splitedByEquality[1];
@@ -105,3 +117,9 @@ export class Parser {
 }
 
 export const parser = new Parser(process.argv.slice(2));
+
+// ^([+-]?[\s]?(\d+(\.\d+|)))
+// ^([+-]?[\s]*?\d+(\.\d+)?)
+// (?<part>([+-]?\d+(\.\d+)?)([+*-]X(\^[012])?)?)\k<part>?
+// (?<part>([+-]?\d+(\.\d+)?)([+*-]X(\^[\d])?)?)*=
+// (?<part>((?<digit>[+-]?\d+(\.\d+)?))([+*-](\k<digit>|(X(\^[\d])?)))?)

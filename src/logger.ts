@@ -88,6 +88,10 @@ export class Logger {
 			this.log(solution);
 		})
 	}
+
+	logError(error: any) {
+		this.log('Error:', error);
+	}
 };
 
 export const logger = new Logger();

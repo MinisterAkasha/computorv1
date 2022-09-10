@@ -4,6 +4,7 @@ import { ParsedDataType, parser } from './src/parcer';
 import { Coefficients, getDiscriminant, getSolutions } from "./src/equation";
 import { logger } from "./src/logger";
 import { generateReducedForm } from "./src/reducedForm";
+import { decimalToFraction } from './src/utils';
 
 export const getPolynomialPower = (data: ParsedDataType) => {
 	const powers = Object.keys(data);
@@ -30,7 +31,13 @@ export const getCoefficients = (data: ParsedDataType) => {
 }
 
 const app = () => {
-    parser.parse();
+	try {
+		parser.parse();
+	} catch (error) {
+		logger.logError(error);
+		return;
+	}
+    
 
 	const parsedData = parser.getData();
 
@@ -59,6 +66,9 @@ const app = () => {
 	logger.logSolutions(solution);
 }
 
-app();
+console.log(decimalToFraction(4.5));
+
+// app();
 
 // npx ts-node index.ts
+// npm start -- "..."
