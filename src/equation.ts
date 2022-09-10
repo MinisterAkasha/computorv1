@@ -3,7 +3,7 @@ export const abs = (num: number) => num >= 0 ? num : num * -1;
 const getComplexPart = (b: number, a: number) => {
 	const divider = 2 * a;
 
-	return ((-1 * b) / divider).toFixed(7);
+	return parseFloat(((-1 * b) / divider).toFixed(7));
 }
 
 const getRealPart = (D: number, a: number) => {
@@ -47,8 +47,8 @@ export const getSolutions = ({a, b, c}: Coefficients, power: number, D?: number)
 	}
 
 	if (power === 2 && D >= 0) {
-		solution[0] = ((-1 * b - sqrt(D)) / (2 * a)).toFixed(5);
-		solution[1] = ((-1 * b + sqrt(D)) / (2 * a)).toFixed(5);
+		solution[0] = String(parseFloat(((-1 * b - sqrt(D)) / (2 * a)).toFixed(5)));
+		solution[1] = String(parseFloat(((-1 * b + sqrt(D)) / (2 * a)).toFixed(5)));
 	} else {
 		solution[0] = `${getComplexPart(b, a)} - ${getRealPart(D, a)} * i`;
 		solution[1] = `${getComplexPart(b, a)} + ${getRealPart(D, a)} * i`;

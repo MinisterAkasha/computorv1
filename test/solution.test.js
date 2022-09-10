@@ -116,59 +116,59 @@ describe('Reduced form test', () => {
 		expect(solutions[1]).toBe(EQUATIOS[13].solutions.x2);
 	});
 
-	// it(EQUATIOS[14].eq, () => {
-	// 	const solutions = getSolution(EQUATIOS[14].eq);
-	//
-	// 	expect(solutions[0]).toBe(EQUATIOS[14].solutions.x1);
-	// 	expect(solutions[1]).toBe(EQUATIOS[14].solutions.x2);
-	// });
+	it(EQUATIOS[14].eq, () => {
+		const solutions = getSolution(EQUATIOS[14].eq);
+	
+		expect(solutions[0]).toBe(EQUATIOS[14].solutions.x1);
+		expect(solutions[1]).toBe(EQUATIOS[14].solutions.x2);
+	});
 
-	// it(EQUATIOS[15].eq, () => {
-	// 	const solutions = getSolution(EQUATIOS[15].eq);
-	//
-	// 	expect(solutions[0]).toBe(EQUATIOS[15].solutions.x1);
-	// 	expect(solutions[1]).toBe(EQUATIOS[15].solutions.x2);
-	// });
-	//
-	// it(EQUATIOS[16].eq, () => {
-	// 	const solutions = getSolution(EQUATIOS[16].eq);
-	//
-	// 	expect(solutions[0]).toBe(EQUATIOS[16].solutions.x1);
-	// 	expect(solutions[1]).toBe(EQUATIOS[16].solutions.x2);
-	// });
-	//
-	// it(EQUATIOS[17].eq, () => {
-	// 	const solutions = getSolution(EQUATIOS[17].eq);
-	//
-	// 	expect(solutions[0]).toBe(EQUATIOS[17].solutions.x1);
-	// 	expect(solutions[1]).toBe(EQUATIOS[17].solutions.x2);
-	// });
-	//
-	// it(EQUATIOS[18].eq, () => {
-	// 	const solutions = getSolution(EQUATIOS[18].eq);
-	//
-	// 	expect(solutions[0]).toBe(EQUATIOS[18].solutions.x1);
-	// 	expect(solutions[1]).toBe(EQUATIOS[18].solutions.x2);
-	// });
-	//
-	// it(EQUATIOS[19].eq, () => {
-	// 	const solutions = getSolution(EQUATIOS[19].eq);
-	//
-	// 	expect(solutions[0]).toBe(EQUATIOS[19].solutions.x1);
-	// 	expect(solutions[1]).toBe(EQUATIOS[19].solutions.x2);
-	// });
-	//
-	// it(EQUATIOS[20].eq, () => {
-	// 	const solutions = getSolution(EQUATIOS[20].eq);
-	//
-	// 	expect(solutions[0]).toBe(EQUATIOS[20].solutions.x1);
-	// 	expect(solutions[1]).toBe(EQUATIOS[20].solutions.x2);
-	// });
-	//
-	// it(EQUATIOS[21].eq, () => {
-	// 	const solutions = getSolution(EQUATIOS[21].eq);
-	//
-	// 	expect(solutions[0]).toBe(EQUATIOS[21].solutions.x1);
-	// 	expect(solutions[1]).toBe(EQUATIOS[21].solutions.x2);
-	// });
+	it(EQUATIOS[15].eq, () => {
+		const solutions = getSolution(EQUATIOS[15].eq);
+	
+		expect(solutions[0]).toBe(EQUATIOS[15].solutions.x1);
+		expect(solutions[1]).toBe(EQUATIOS[15].solutions.x2);
+	});
+	
+	it(EQUATIOS[16].eq, () => {
+		const solutions = getSolution(EQUATIOS[16].eq);
+	
+		expect(solutions[0]).toBe(EQUATIOS[16].solutions.x1);
+		expect(solutions[1]).toBe(EQUATIOS[16].solutions.x2);
+	});
+	
+	it(EQUATIOS[17].eq, () => {
+		const solutions = getSolution(EQUATIOS[17].eq);
+	
+		expect(solutions[0]).toBe(EQUATIOS[17].solutions.x1);
+		expect(solutions[1]).toBe(EQUATIOS[17].solutions.x2);
+	});
+	
+	it(EQUATIOS[18].eq, () => {
+		const solutions = getSolution(EQUATIOS[18].eq);
+	
+		expect(solutions[0]).toBe(EQUATIOS[18].solutions.x1);
+		expect(solutions[1]).toBe(EQUATIOS[18].solutions.x2);
+	});
+	
+	it(EQUATIOS[19].eq, () => {
+		const solutions = getSolution(EQUATIOS[19].eq);
+	
+		expect(solutions[0]).toBe(EQUATIOS[19].solutions.x1);
+		expect(solutions[1]).toBe(EQUATIOS[19].solutions.x2);
+	});
+	
+	it(EQUATIOS[20].eq, () => {
+		const solutions = getSolution(EQUATIOS[20].eq);
+	
+		expect(solutions[0]).toBe(EQUATIOS[20].solutions.x1);
+		expect(solutions[1]).toBe(EQUATIOS[20].solutions.x2);
+	});
+	
+	it(EQUATIOS[21].eq, () => {
+		const solutions = getSolution(EQUATIOS[21].eq);
+	
+		expect(solutions[0]).toBe(EQUATIOS[21].solutions.x1);
+		expect(solutions[1]).toBe(EQUATIOS[21].solutions.x2);
+	});
 });
