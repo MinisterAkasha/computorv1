@@ -1,5 +1,6 @@
-import {abs} from "./equation";
+import {abs} from "./math";
 import {ParsedDataType, ParsedDataTypeObj} from "./parcer";
+import {decimalToFraction} from "./utils";
 
 const powerToString = (power: number) => {
 	if (power > 1) {

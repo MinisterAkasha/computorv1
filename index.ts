@@ -1,10 +1,8 @@
-#!/usr/bin/node
 "use strict"
 import { ParsedDataType, parser } from './src/parcer';
 import { Coefficients, getDiscriminant, getSolutions } from "./src/equation";
 import { logger } from "./src/logger";
 import { generateReducedForm } from "./src/reducedForm";
-import { decimalToFraction } from './src/utils';
 
 export const getPolynomialPower = (data: ParsedDataType) => {
 	const powers = Object.keys(data);
@@ -66,9 +64,7 @@ const app = () => {
 	logger.logSolutions(solution);
 }
 
-console.log(decimalToFraction(4.5));
-
-// app();
+app();
 
 // npx ts-node index.ts
 // npm start -- "..."

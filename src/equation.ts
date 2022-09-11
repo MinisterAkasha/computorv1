@@ -1,15 +1,16 @@
-export const abs = (num: number) => num >= 0 ? num : num * -1;
+import { abs } from "./math";
+import {decimalToFraction} from "./utils";
 
 const getComplexPart = (b: number, a: number) => {
 	const divider = 2 * a;
 
-	return parseFloat(((-1 * b) / divider).toFixed(7));
+	return decimalToFraction(parseFloat(((-1 * b) / divider).toFixed(7)));
 }
 
 const getRealPart = (D: number, a: number) => {
 	const divider = 2 * a;
 
-	return abs((sqrt(abs(D)) / divider)).toFixed(5);
+	return decimalToFraction(abs((sqrt(abs(D)) / divider)).toFixed(5));
 }
 
 // нахождения квадратного корня по формуле Герона
@@ -43,12 +44,12 @@ export const getSolutions = ({a, b, c}: Coefficients, power: number, D?: number)
 	if (power === 0) {
 		return [c === 0 ? Infinity : -Infinity];
 	} else if (power === 1) {
-		return [-1 * c / b];
+		return [decimalToFraction(-1 * c / b)];
 	}
 
 	if (power === 2 && D >= 0) {
-		solution[0] = String(parseFloat(((-1 * b - sqrt(D)) / (2 * a)).toFixed(5)));
-		solution[1] = String(parseFloat(((-1 * b + sqrt(D)) / (2 * a)).toFixed(5)));
+		solution[0] = decimalToFraction(parseFloat(((-1 * b - sqrt(D)) / (2 * a)).toFixed(5)));
+		solution[1] = decimalToFraction(parseFloat(((-1 * b + sqrt(D)) / (2 * a)).toFixed(5)));
 	} else {
 		solution[0] = `${getComplexPart(b, a)} - ${getRealPart(D, a)} * i`;
 		solution[1] = `${getComplexPart(b, a)} + ${getRealPart(D, a)} * i`;
