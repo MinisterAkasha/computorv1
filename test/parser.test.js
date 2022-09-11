@@ -1,4 +1,5 @@
 import { Parser } from '../src/parcer';
+import {EQUATIOS} from "./data";
 
 const parserTestTemplate = (equation, {power0, power1, power2}) => {
     const parser = new Parser(equation);
@@ -16,185 +17,6 @@ const setExpectedData = ({ power0, power1, power2 }) => {
     }
 }
 
-export const EQUATIOS = {
-    0: {
-		eq: '-534 - 4.2 * X^2 + 3 * X + 500 = 4 * X^2 + 2.5 * X',
-	    rf: '-8.2 * X^2 + 0.5 * X - 34 = 0',
-	    solutions: {
-			x1: '0.0304878 - 2.03603 * i',
-		    x2: '0.0304878 + 2.03603 * i',
-	    },
-    },
-    1: {
-		eq: '10 * X^2 + X^1 + 15 * X^0 = 0',
-	    rf: '10 * X^2 + X + 15 = 0',
-	    solutions: {
-			x1: '-1/20 - 30593/25000 * i',
-		    x2: '-1/20 + 30593/25000 * i',
-	    },
-    },
-    2: {
-		eq: 'X^2 + X^1 + X^0 = 0',
-	    rf: 'X^2 + X + 1 = 0',
-	    solutions: {
-			x1: '-1/2 - 0.86603 * i',
-		    x2: '-1/2 + 0.86603 * i',
-	    },
-    },
-    3: {
-		eq: '5 * X^2 + 10 * X^1 + 15 * X^0 = 0',
-	    rf: '5 * X^2 + 10 * X + 15 = 0',
-	    solutions: {
-		    x1: '-1 - 1.41421 * i',
-		    x2: '-1 + 1.41421 * i',
-	    },
-    },
-    4: {
-		eq: '5 * X^2 + 10 * X^1 + 15 = 0',
-	    rf: '5 * X^2 + 10 * X + 15 = 0',
-	    solutions: {
-		    x1: '-1 - 1.41421 * i',
-		    x2: '-1 + 1.41421 * i',
-	    },
-    },
-    5: {
-		eq: 'X^2 + 10 = 10',
-	    rf: 'X^2 = 0',
-	    solutions: {
-			x1: '0',
-		    x2: undefined,
-	    },
-    },
-    6: {
-		eq: '10 = 10',
-	    rf: '0 = 0',
-	    solutions: {
-			x1: Infinity,
-		    x2: undefined,
-	    },
-    },
-    7: {
-		eq: '10 * X^0 = 10 * X^0',
-	    rf: '0 = 0',
-	    solutions: {
-		    x1: Infinity,
-		    x2: undefined,
-	    },
-    },
-    8: {
-		eq: '2 * X^2 - 3 * X^1 - 10 * X^0 = -2 * X^2 + 5 * X^1 + 10 * X^0',
-	    rf: '4 * X^2 - 8 * X - 20 = 0',
-	    solutions: {
-			x1: '-1.44949',
-		    x2: '3.44949',
-	    },
-    },
-    9: {
-		eq: '2 * X^2 - 3 * X - 10 = -2 * X^2 + 5 * X + 10',
-	    rf: '4 * X^2 - 8 * X - 20 = 0',
-	    solutions: {
-		    x1: '-1.44949',
-		    x2: '3.44949',
-	    },
-    },
-    10: {
-		eq: '- 10 * X - 3 * X^2 - 3 = 0',
-	    rf: '-3 * X^2 - 10 * X - 3 = 0',
-	    solutions: {
-		    x1: '-0.33333',
-		    x2: '-3',
-	    },
-    },
-    11: {
-		eq: '0 * X - 0 * X^2 - 0 = 0',
-	    rf: '0 = 0',
-	    solutions: {
-			x1: Infinity,
-		    x2: undefined,
-	    },
-    },
-    12: {
-		eq: '- 0 * X - 0 * X^2 - 0 = 0',
-	    rf: '0 = 0',
-	    solutions: {
-		    x1: Infinity,
-		    x2: undefined,
-	    },
-    },
-    13: {
-		eq: '0 = 10.34 * X^2 - 4.6 * X + 1.1',
-	    rf: '-10.34 * X^2 + 4.6 * X - 1.1 = 0',
-	    solutions: {
-			x1: '0.2224371 - 4771/20000 * i',
-		    x2: '0.2224371 + 4771/20000 * i',
-	    },
-    },
-    14: {
-		eq: '0 = 10.3 * X^2 - 4.6 * X - 0.1 + 10.4',
-	    rf: '-10.3 * X^2 + 4.6 * X - 10.3 = 0',
-	    solutions: {
-			x1: '0.223301 - 3899/4000 * i',
-		    x2: '0.223301 + 3899/4000 * i',
-	    },
-    },
-	15: {
-		eq: '10 * X = 10 * X',
-		rf: '0 = 0',
-		solutions: {
-			x1: Infinity,
-		    x2: undefined,
-	    },
-	},
-	16: {
-		eq: '10 * X - 10 = 10 * X - 10',
-		rf: '0 = 0',
-		solutions: {
-			x1: Infinity,
-		    x2: undefined,
-	    },
-	},
-	17: {
-		eq: '15 * X^2 - 10 * X - 10 = 15 * X^2 - 10 * X - 10',
-		rf: '0 = 0',
-		solutions: {
-			x1: Infinity,
-		    x2: undefined,
-	    },
-	},
-	18: {
-		eq: '10 = 10',
-		rf: '0 = 0',
-		solutions: {
-			x1: Infinity,
-		    x2: undefined,
-	    },
-	},
-	19: {
-		eq: '10 = 0',
-		rf: '10 = 0',
-		solutions: {
-			x1: -Infinity,
-		    x2: undefined,
-	    },
-	},
-	20: {
-		eq: '10 * X^0 = 10 * X^0',
-		rf: '0 = 0',
-		solutions: {
-			x1: Infinity,
-		    x2: undefined,
-	    },
-	},
-	21: {
-		eq: '100 * X^2 - 16 * X + 1 = 100 * X^2 + 16 * X + 1',
-		rf: '-32 * X = 0',
-		solutions: {
-			x1: "0",
-		    x2: undefined,
-	    },
-	},
-};
-
 describe('Parser tests', () => {
 
     test(EQUATIOS[0].eq, () => {
@@ -203,7 +25,7 @@ describe('Parser tests', () => {
             power0: {
                 power: 0,
                 multiplier: -34,
-            }, 
+            },
             power1: {
                 power: 1,
                 multiplier: 0.5,
@@ -222,7 +44,7 @@ describe('Parser tests', () => {
                 power0: {
                     power: 0,
                     multiplier: 15,
-                }, 
+                },
                 power1: {
                     power: 1,
                     multiplier: 1,
@@ -241,7 +63,7 @@ describe('Parser tests', () => {
                 power0: {
                     power: 0,
                     multiplier: 1,
-                }, 
+                },
                 power1: {
                     power: 1,
                     multiplier: 1,
@@ -260,7 +82,7 @@ describe('Parser tests', () => {
                 power0: {
                     power: 0,
                     multiplier: 15,
-                }, 
+                },
                 power1: {
                     power: 1,
                     multiplier: 10,
@@ -279,7 +101,7 @@ describe('Parser tests', () => {
                 power0: {
                     power: 0,
                     multiplier: 15,
-                }, 
+                },
                 power1: {
                     power: 1,
                     multiplier: 10,
@@ -314,14 +136,14 @@ describe('Parser tests', () => {
             {}
       )
     })
-    
+
     test(EQUATIOS[8].eq, () => {
         parserTestTemplate(EQUATIOS[8].eq,
             {
                 power0: {
                     power: 0,
                     multiplier: -20,
-                }, 
+                },
                 power1: {
                     power: 1,
                     multiplier: -8,
@@ -340,7 +162,7 @@ describe('Parser tests', () => {
                 power0: {
                     power: 0,
                     multiplier: -20,
-                }, 
+                },
                 power1: {
                     power: 1,
                     multiplier: -8,
@@ -359,7 +181,7 @@ describe('Parser tests', () => {
                 power0: {
                     power: 0,
                     multiplier: -3,
-                }, 
+                },
                 power1: {
                     power: 1,
                     multiplier: -10,
@@ -371,7 +193,7 @@ describe('Parser tests', () => {
             }
       )
     })
-    
+
     test(EQUATIOS[11].eq, () => {
         parserTestTemplate(EQUATIOS[11].eq,
             {}
@@ -390,7 +212,7 @@ describe('Parser tests', () => {
                 power0: {
                     power: 0,
                     multiplier: -1.1,
-                }, 
+                },
                 power1: {
                     power: 1,
                     multiplier: 4.6,
@@ -409,7 +231,7 @@ describe('Parser tests', () => {
                 power0: {
                     power: 0,
                     multiplier: -10.3,
-                }, 
+                },
                 power1: {
                     power: 1,
                     multiplier: 4.6,
@@ -469,6 +291,44 @@ describe('Parser tests', () => {
 				power1: {
 					power: 1,
 					multiplier: -32,
+				}
+			}
+		)
+	})
+
+	test(EQUATIOS[22].eq, () => {
+		parserTestTemplate(EQUATIOS[22].eq,
+			{
+				power0: {
+					power: 0,
+					multiplier: 12,
+				},
+				power1: {
+					power: 1,
+					multiplier: -84,
+				},
+				power2: {
+					power: 2,
+					multiplier: 1,
+				}
+			}
+		)
+	})
+
+	test(EQUATIOS[23].eq, () => {
+		parserTestTemplate(EQUATIOS[23].eq,
+			{
+				power0: {
+					power: 0,
+					multiplier: 12.76,
+				},
+				power1: {
+					power: 1,
+					multiplier: -84.245,
+				},
+				power2: {
+					power: 2,
+					multiplier: 0.32,
 				}
 			}
 		)
